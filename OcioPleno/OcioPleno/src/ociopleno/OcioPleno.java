@@ -15,7 +15,11 @@ public class OcioPleno {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //llamar un jframe desde el main
+       vistaTabla t= new vistaTabla();       
+       t.setVisible(true);
+       
+        
     }
     
 }
