@@ -16,8 +16,7 @@ public class OcioPleno {
      */
     public static void main(String[] args) {
         //llamar un jframe desde el main
-       vistaTabla t= new vistaTabla();       
-       t.setVisible(true);
+      
        
         
     }
