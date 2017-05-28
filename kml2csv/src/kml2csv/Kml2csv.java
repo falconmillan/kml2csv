@@ -29,8 +29,8 @@ public class Kml2csv {
             
         System.out.println("Nuevo"+" "+i);
         Element e;
-        Node n=l.item(i);
-        e=(Element)n; 
+      
+        e=(Element) l.item(i);; 
         NodeList child=e.getChildNodes();
             for (int j=0; j<child.getLength();j++){
                 Node m=child.item(j);
