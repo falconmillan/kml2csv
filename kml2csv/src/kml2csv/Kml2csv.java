@@ -34,9 +34,9 @@ public class Kml2csv {
         NodeList child=e.getChildNodes();
             for (int j=0; j<child.getLength();j++){
                 Node m=child.item(j);
-                Element elemento;
-                elemento=(Element) m;
-                if(elemento.getLocalName().compareTo("gx:coord")==0){
+                //Element elemento;
+                //elemento=(Element) m;
+                if(m.getLocalName().compareTo("gx:coord")==0){
                     System.out.print(kp.extraerCoordenadas(e));
                 }
                 if(m.getLocalName().compareTo("when")==0){
