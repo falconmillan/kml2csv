@@ -5,6 +5,12 @@
  */
 package kml2csv;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import javax.xml.parsers.*;
@@ -25,40 +31,38 @@ public class Kml2csv {
         KmlParser kp= new KmlParser(base+file);
         
         NodeList l =kp.get("gx:Track");
+        
         for (int i=0; i<l.getLength();i++){
+                kp.toCSV(l.item(i), base+"track"+i+".csv");
+           /* try {
+                BufferedWriter sa= new BufferedWriter(new FileWriter(new File(base+"track"+i+".csv")));
             
-        System.out.println("Nuevo"+" "+i);
-        Node e;
-      
-        e=l.item(i);
-        if(e.hasChildNodes()){
-            NodeList child=e.getChildNodes();
-            for (int j=0; j<child.getLength();j++){
-                Node m=child.item(j);
-                //Element elemento;
-                //elemento=(Element) m;
-                if(m.getNodeType()==Node.ELEMENT_NODE){
-                    if(m.getNodeName().compareTo("gx:coord")==0){
-                        System.out.print(kp.extraerCoordenadas(m));
+            sa.write("LONGITUD,"+"LATITUD,"+"ALTITUD,"+"DIA,"+"HORA");
+            sa.newLine();
+            Node e;
+            e=l.item(i);
+            if(e.hasChildNodes()){
+                NodeList child=e.getChildNodes();
+                for (int j=0; j<child.getLength();j++){
+                    Node m=child.item(j);                   
+                    if(m.getNodeType()==Node.ELEMENT_NODE){
+                        if(m.getNodeName().compareTo("gx:coord")==0){
+                            sa.write(kp.extraerCoordenadas(m)+",");                     
+                        }
+                        if(m.getNodeName().compareTo("when")==0){
+                            sa.write(kp.extraerTiempo(m));
+                            sa.newLine();
+                        } 
                     }
-                    if(m.getNodeName().compareTo("when")==0){
-                        System.out.print(kp.extraerTiempo(m));
-                        System.out.println("");
-                    } 
-                    /*System.out.print("URI: ");System.out.print(m.getBaseURI());
-                    System.out.print("name : ");System.out.print(m.getLocalName());
-                    System.out.print("Name: ");System.out.print(m.getNodeName());
-                    System.out.print("Value: ");System.out.println(m.getNodeValue());
-                    */
-                    
                 }
+            }else{
+                System.out.println("mala solucion");
             }
-        
-        }else{
-            System.out.println("mala solucion");
+            sa.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Kml2csv.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
         }
-        }
-        
     }
     
 }

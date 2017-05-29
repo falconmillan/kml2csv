@@ -5,7 +5,9 @@
  */
 package kml2csv;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,5 +69,34 @@ public class KmlParser {
        
        return r;
    }
-   
+   public void toCSV(Node e, String file){
+       
+            try {
+                BufferedWriter sa= new BufferedWriter(new FileWriter(new File(file)));
+            
+            sa.write("LONGITUD,"+"LATITUD,"+"ALTITUD,"+"DIA,"+"HORA");
+            sa.newLine();
+            if(e.hasChildNodes()){
+                NodeList child=e.getChildNodes();
+                for (int j=0; j<child.getLength();j++){
+                    Node m=child.item(j);                   
+                    if(m.getNodeType()==Node.ELEMENT_NODE){
+                        if(m.getNodeName().compareTo("gx:coord")==0){
+                            sa.write(this.extraerCoordenadas(m)+",");                     
+                        }
+                        if(m.getNodeName().compareTo("when")==0){
+                            sa.write(this.extraerTiempo(m));
+                            sa.newLine();
+                        } 
+                    }
+                }
+            }else{
+                System.out.println("mala solucion");
+            }
+            sa.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Kml2csv.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+   }
 }
