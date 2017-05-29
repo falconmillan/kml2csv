@@ -49,14 +49,22 @@ public class KmlParser {
        return dom.getElementsByTagName(type);
    } 
    public String extraerCoordenadas(Node m){
-       String r=m.getTextContent();
-       r=r.replace(' ', ',');
+       String r="",t;
+       t=m.getTextContent();t.trim();
+       String [] v = t.split(" ");
+       for(int i=0; i<v.length;i++){
+           r=r+v[i];
+           if(i<v.length-1)r=r+",";
+       }
+       
+       
        return r;
    }
    public String extraerTiempo(Node m){
        String r=m.getTextContent();
        r=r.replace('T', ',');
        r=r.replace('Z', ' ');
+       
        return r;
    }
    
