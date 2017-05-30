@@ -134,7 +134,7 @@ KmlParser kp;
         //default title and icon
         jOptionPane1.setVisible(true);
         JOptionPane.showMessageDialog(this,
-            "Ficheros Creados correctamente.");
+            "Ficheros: trackX.csv Creados correctamente en el mismo directorio que el original.");
         dispose();
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
