@@ -91,7 +91,8 @@ public class KmlParser {
                     }
                 }
             }else{
-                System.out.println("mala solucion");
+                System.out.println("Etiqueta sin datos de interés");
+                System.exit(0);
             }
             sa.close();
             } catch (IOException ex) {
