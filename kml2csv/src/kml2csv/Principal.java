@@ -20,12 +20,13 @@ public class Principal extends javax.swing.JFrame {
 String base;
 String file;
 File fichero;
-KmlParser kp= new KmlParser(base+file);
+KmlParser kp;
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        jOptionPane1.setVisible(false);
     }
 
     /**
@@ -42,7 +43,6 @@ KmlParser kp= new KmlParser(base+file);
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jFileChooser1 = new javax.swing.JFileChooser();
-        jLabel2 = new javax.swing.JLabel();
         jOptionPane1 = new javax.swing.JOptionPane();
 
         jDialog1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -82,8 +82,6 @@ KmlParser kp= new KmlParser(base+file);
             }
         });
 
-        jLabel2.setText("Todo Bien");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,13 +98,8 @@ KmlParser kp= new KmlParser(base+file);
                         .addComponent(jButton1)))
                 .addGap(201, 201, 201))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jOptionPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -123,8 +116,7 @@ KmlParser kp= new KmlParser(base+file);
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(68, 68, 68)
+                        .addGap(82, 82, 82)
                         .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jOptionPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -135,11 +127,12 @@ KmlParser kp= new KmlParser(base+file);
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        kp= new KmlParser(base+"\\"+file);
         NodeList l =kp.get("gx:Track");
         for (int i=0; i<l.getLength();i++)kp.toCSV(l.item(i), base+"\\track"+i+".csv");
         
         //default title and icon
-        
+        jOptionPane1.setVisible(true);
         JOptionPane.showMessageDialog(this,
             "Ficheros Creados correctamente.");
         dispose();
@@ -201,7 +194,6 @@ KmlParser kp= new KmlParser(base+file);
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
