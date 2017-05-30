@@ -44,7 +44,8 @@ public class KmlParser {
             dom.getDocumentElement().normalize();
 
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-            Logger.getLogger(KmlParser.class.getName()).log(Level.SEVERE, null, ex);        
+            Logger.getLogger(KmlParser.class.getName()).log(Level.SEVERE, null, ex); 
+            System.exit(0);
         }
     }
    public NodeList get(String type){
