@@ -1,6 +1,7 @@
 package proyectos;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,6 +24,10 @@ public class Empleado {
     private int antigüedad;
     private int idd;
     private List <Proyecto> proyectos;
+
+    public Empleado() {
+        this.proyectos = new ArrayList<>();
+    }
 
     public int getIde() {
         return ide;

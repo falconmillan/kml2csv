@@ -1,5 +1,8 @@
 package proyectos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,6 +14,35 @@ package proyectos;
  * @author medio
  */
 public class Departamento {
-    int idd;
-    String nombre;
+    private int idd;
+    private String nombre;
+    private List <Empleado> empleados;
+
+    public Departamento() {
+        this.empleados = new ArrayList<>();
+    }
+    public int getIdd() {
+        return idd;
+    }
+
+    public void setIdd(int idd) {
+        this.idd = idd;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(List<Empleado> empleados) {
+        this.empleados = empleados;
+    }
+    
 }
