@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.neodatis.odb.ODB;
+import org.neodatis.odb.ODBFactory;
 
 /**
  *
@@ -25,6 +27,7 @@ static String femp="C:\\Users\\jcfalcon\\Documents\\documentosJava\\empleado.csv
 static String fdep="C:\\Users\\jcfalcon\\Documents\\documentosJava\\departamento.csv";
 static String fpry="C:\\Users\\jcfalcon\\Documents\\documentosJava\\proyecto.csv";
 static String relempry="C:\\Users\\jcfalcon\\Documents\\documentosJava\\relproyemp.csv";
+static String database="C:\\Users\\jcfalcon\\Documents\\documentosJava\\proyectos.neodatis";
 static List <Departamento> ldep;
 static List <Empleado> lemp;
 static List <Proyecto> lpry;
@@ -37,10 +40,10 @@ static List <Proyecto> lpry;
     lemp=fromCSV2Empleado(",",femp);
     lpry=fromCSV2Proyecto(",",fpry);
     fromCSV2rel(",",relempry);
-        for(int i=0;i<lemp.size();i++){
-           System.out.println(lemp.get(i).getCategoría());
-        }
-        System.out.println(lemp.get(0).getCategoría());
+    cargaNeodatis(database);
+    
+        
+        System.out.println("Todo ha ido conforme lo esperado.");
     }
  static public List<Empleado> fromCSV2Empleado(String separador,String file){
 //fichero de texto
@@ -157,6 +160,14 @@ static List <Proyecto> lpry;
         }
        
     }
+ static public void cargaNeodatis(String base){
+     ODB db =ODBFactory.open(base);
+     for(Departamento x:ldep)db.store(x);
+     for(Empleado x:lemp)db.store(x);
+     for(Proyecto x:lpry)db.store(x);
+     db.close();
+         }
+ 
  static public Departamento findDepartamento(List<Departamento> l, int idd){
      Departamento r;r=null;
      for(Departamento x:l)if(x.getIdd()==idd)r=x;     
