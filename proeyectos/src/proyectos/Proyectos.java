@@ -41,9 +41,11 @@ static List <Proyecto> lpry;
     lpry=fromCSV2Proyecto(",",fpry);
     fromCSV2rel(",",relempry);
     cargaNeodatis(database);
+    Consultas c= new Consultas (database);
+    c.consulta1("empleado2");
     
         
-        System.out.println("Todo ha ido conforme lo esperado.");
+        System.out.println("Todo ha ido conforme lo esperado. Base de datos cargada");
     }
  static public List<Empleado> fromCSV2Empleado(String separador,String file){
 //fichero de texto
@@ -61,11 +63,12 @@ static List <Proyecto> lpry;
                String [] cadena=micanal.readLine().split(separador);
                e.setIde(Integer.parseInt(cadena[0]));
                e.setNick(cadena[1]);              
-               e.setCategoría(cadena[2]);
-               e.setAntigüedad(Integer.parseInt(cadena[3]));
-               e.setIdd(Integer.parseInt(cadena[4]));
+               e.setCategoria(cadena[2]);
+               e.setAntiguedad(Integer.parseInt(cadena[3]));
                Departamento d;
                d=findDepartamento(ldep,Integer.parseInt(cadena[4]));
+               //añado el departamento al empleado y el empleado al departamento
+               if(d!=null)e.setDep(d);
                if(d!=null)d.getEmpleados().add(e);
                r.add(e);
                i=i+1;
@@ -119,7 +122,7 @@ static List <Proyecto> lpry;
                String [] cadena=micanal.readLine().split(separador);
                e.setIdp(Integer.parseInt(cadena[0]));
                e.setNombre(cadena[1]);              
-               e.setDescripción(cadena[2]);
+               e.setDescripcion(cadena[2]);
                r.add(e);
                i=i+1;
            }
@@ -191,4 +194,5 @@ static List <Proyecto> lpry;
      if(s.compareTo("0")==0)r=false;
      return r;
  }
+  
 }

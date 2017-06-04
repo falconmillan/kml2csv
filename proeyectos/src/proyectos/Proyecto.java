@@ -17,7 +17,7 @@ import java.util.List;
 public class Proyecto {
     private int idp;
     private String nombre;
-    private String descripción;
+    private String descripcion;
     private boolean acabado;
     private List <Empleado> empleados;
 
@@ -50,8 +50,8 @@ public class Proyecto {
     /**
      * @return the descripción
      */
-    public String getDescripción() {
-        return descripción;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     /**
@@ -69,12 +69,18 @@ public class Proyecto {
         this.nombre = nombre;
     }
 
-    public void setDescripción(String descripción) {
-        this.descripción = descripción;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public void setEmpleados(List<Empleado> empleados) {
         this.empleados = empleados;
     }
-    
+    public boolean isEmpleado(Empleado e){
+        boolean r=false;
+        for(Empleado x :this.empleados){
+            if(x.getIde()==e.getIde())r=true;
+        }
+        return r;
+    }
 }

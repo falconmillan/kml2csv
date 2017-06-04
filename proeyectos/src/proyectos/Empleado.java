@@ -20,9 +20,9 @@ import java.util.List;
 public class Empleado {
     private int ide;
     private String nick;
-    private String categoría;
-    private int antigüedad;
-    private int idd;
+    private String categoria;
+    private int antiguedad;
+    private Departamento dep;
     private List <Proyecto> proyectos;
 
     public Empleado() {
@@ -45,28 +45,28 @@ public class Empleado {
         this.nick = nick;
     }
 
-    public String getCategoría() {
-        return categoría;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCategoría(String categoría) {
-        this.categoría = categoría;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
-    public int getAntigüedad() {
-        return antigüedad;
+    public int getAntiguedad() {
+        return antiguedad;
     }
 
-    public void setAntigüedad(int antigüedad) {
-        this.antigüedad = antigüedad;
+    public void setAntiguedad(int antiguedad) {
+        this.antiguedad = antiguedad;
     }
 
-    public int getIdd() {
-        return idd;
+    public Departamento getDep() {
+        return dep;
     }
 
-    public void setIdd(int idd) {
-        this.idd = idd;
+    public void setDep(Departamento dep) {
+        this.dep = dep;
     }
 
     public List<Proyecto> getProyectos() {
@@ -76,6 +76,14 @@ public class Empleado {
     public void setProyectos(List<Proyecto> proyectos) {
         this.proyectos = proyectos;
     }
+    public boolean isProyecto(Proyecto p){
+        boolean r=false;
+        for(Proyecto x : this.proyectos){
+            if(x.getIdp()==p.getIdp())r=true;
+        }
+        return r;
+    }
+    }
     
 
 
@@ -84,4 +92,3 @@ public class Empleado {
    
 
 
-}
