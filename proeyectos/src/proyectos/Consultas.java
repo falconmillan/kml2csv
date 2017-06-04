@@ -46,8 +46,8 @@ public class Consultas {
     
     public void consulta1(String nick){
      ODB  db;
-     if(!basededatos.isEmpty()){
-         db =ODBFactory.open(basededatos);
+     db =ODBFactory.open(basededatos);
+     if(!basededatos.isEmpty()){         
          ICriterion criterio = Where.equal("nick",nick);
          IQuery query = new CriteriaQuery(Empleado.class, criterio);
          Objects <Empleado> e = db.getObjects(query);
@@ -78,4 +78,27 @@ public class Consultas {
          System.out.println("Consulta1.Base de datos nula.");
      }
     }
+    public void consulta2(){
+      ODB  db;
+      db =ODBFactory.open(basededatos);
+     if(!basededatos.isEmpty()){
+         ICriterion criterio = Where.equal("acabado",false);
+         IQuery query = new CriteriaQuery(Proyecto.class, criterio);
+         Objects <Proyecto> plist = db.getObjects(query);
+         Iterator cursor = plist.iterator();
+         while(cursor.hasNext()){
+             Proyecto p= (Proyecto)cursor.next();
+             if(p.getEmpleados().size()<=3){
+                 String total="Proyecto: "+p.getNombre();
+                 total=total+" Descripcion: "+p.getDescripcion();
+                 total=total+"Participantes: "+p.getEmpleados().size();
+                 System.out.println(total);
+             }
+         }
+     
+     }else{
+         System.out.println("Consulta2.Error al abrir base de datos."); 
+     }  
+    }
+    
 }
