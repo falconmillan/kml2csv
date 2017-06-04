@@ -44,5 +44,11 @@ public class Departamento {
     public void setEmpleados(List<Empleado> empleados) {
         this.empleados = empleados;
     }
-    
+    public List<Empleado> jefes(){
+        List<Empleado> r= new ArrayList();
+        for(Empleado x: this.empleados){
+            if(x.getCategoria().compareTo("jefe")==0)r.add(x);
+        }
+        return r;
+    }
 }

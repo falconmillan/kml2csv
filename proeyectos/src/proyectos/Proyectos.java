@@ -46,6 +46,8 @@ static List <Proyecto> lpry;
     Consultas c= new Consultas (database);
     c.consulta1("empleado10");
     c.consulta2();
+    c.consulta3();
+    c.consulta4();
     
         
         

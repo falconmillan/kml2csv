@@ -7,6 +7,7 @@ package proyectos;
 
 
 import java.util.Iterator;
+import java.util.List;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
@@ -95,10 +96,61 @@ public class Consultas {
                  System.out.println(total);
              }
          }
+        
+     }else{
+         System.out.println("Consulta2.Error al abrir base de datos."); 
+     } 
+     db.close();
+    }
+    public void consulta3(){
+      ODB  db;
+      db =ODBFactory.open(basededatos);
+     if(!basededatos.isEmpty()){
+         IQuery query = new CriteriaQuery(Departamento.class);
+         Objects <Departamento> dlist = db.getObjects(query);
+         Iterator cursor = dlist.iterator();
+         while(cursor.hasNext()){
+             Departamento d= (Departamento)cursor.next();
+             List <Empleado> e; e=d.jefes();  
+             for(Empleado x: e){
+                 String total="DEPARTAMENTO: "+d.getNombre();
+                 total=total+" Nombre Jefe: "+x.getNick();                 
+                 total=total+" Antiguedad: "+x.getAntiguedad();
+                 System.out.println(total);
+             }
+             
+            
+         }
      
      }else{
          System.out.println("Consulta2.Error al abrir base de datos."); 
      }  
+     db.close();
     }
-    
+     public void consulta4(){
+      ODB  db;
+     db =ODBFactory.open(basededatos);
+     if(!basededatos.isEmpty()){         
+         
+         IQuery query = new CriteriaQuery(Empleado.class);
+         Objects <Empleado> e = db.getObjects(query);
+         Iterator cursor=e.iterator();
+         int jefe=0;int oficial=0;int becario=0;
+         while(cursor.hasNext()){
+             Empleado dummy; dummy=(Empleado) cursor.next();
+             String cat; cat=dummy.getCategoria();
+             if(cat.compareTo("jefe")==0)jefe=jefe+1;
+             if(cat.compareTo("becario")==0)becario=becario+1;
+             if(cat.compareTo("oficial")==0)oficial=oficial+1;  
+             }
+         int total= jefe+oficial+becario;      
+         System.out.println("Jefes: "+jefe+" Porcentaje%: "+ (((double) jefe)/total)*100.0);
+         System.out.println("Oficiales: "+oficial+" Porcentaje%: "+ (((double) oficial)/total)*100.0);
+         System.out.println("Becarios: "+becario+" Porcentaje%: "+ (((double) becario)/total)*100.0);
+         
+         db.close();
+     }else{
+         System.out.println("Consulta4.Base de datos nula.");
+     }
+    }
 }
