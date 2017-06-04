@@ -36,16 +36,19 @@ static List <Proyecto> lpry;
      */
     public static void main(String[] args) {
         // TODO code application logic here
-    ldep=fromCSV2Departamento(",",fdep);
+    /*ldep=fromCSV2Departamento(",",fdep);
     lemp=fromCSV2Empleado(",",femp);
     lpry=fromCSV2Proyecto(",",fpry);
     fromCSV2rel(",",relempry);
     cargaNeodatis(database);
+    System.out.println("Todo ha ido conforme lo esperado. Base de datos cargada");
+        */
     Consultas c= new Consultas (database);
-    c.consulta1("empleado2");
+    c.consulta1("empleado10");
+    c.consulta2();
     
         
-        System.out.println("Todo ha ido conforme lo esperado. Base de datos cargada");
+        
     }
  static public List<Empleado> fromCSV2Empleado(String separador,String file){
 //fichero de texto
@@ -151,8 +154,11 @@ static List <Proyecto> lpry;
                Proyecto p;
                e=findEmpleado(lemp,Integer.parseInt(cadena[1]));
                p=findProyecto(lpry,Integer.parseInt(cadena[0]));
-               e.getProyectos().add(p);
-               p.getEmpleados().add(e);p.setAcabado(logic(cadena[2]));
+               if(!e.isProyecto(p))e.getProyectos().add(p);
+               if(!p.isEmpleado(e)){
+                   p.getEmpleados().add(e);
+                   p.setAcabado(logic(cadena[2]));
+               }
               
                i=i+1;
            }
