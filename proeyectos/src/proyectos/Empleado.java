@@ -76,6 +76,10 @@ public class Empleado {
     public void setProyectos(List<Proyecto> proyectos) {
         this.proyectos = proyectos;
     }
+    /*
+    @param Objeto de la clase Proyecto
+    @return true si l empleado participa en el proyecto p; false en otro caso.
+    */
     public boolean isProyecto(Proyecto p){
         boolean r=false;
         for(Proyecto x : this.proyectos){

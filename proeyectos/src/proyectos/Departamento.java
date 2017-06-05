@@ -44,6 +44,10 @@ public class Departamento {
     public void setEmpleados(List<Empleado> empleados) {
         this.empleados = empleados;
     }
+    /*
+    Devuelve una lista de empleados con la categoría de "jefe" para el departamento.
+    @return La lista de jefes de un departamento.
+    */
     public List<Empleado> jefes(){
         List<Empleado> r= new ArrayList();
         for(Empleado x: this.empleados){

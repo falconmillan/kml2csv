@@ -36,22 +36,17 @@ static List <Proyecto> lpry;
      */
     public static void main(String[] args) {
         // TODO code application logic here
-    /*ldep=fromCSV2Departamento(",",fdep);
-    lemp=fromCSV2Empleado(",",femp);
-    lpry=fromCSV2Proyecto(",",fpry);
-    fromCSV2rel(",",relempry);
-    cargaNeodatis(database);
-    System.out.println("Todo ha ido conforme lo esperado. Base de datos cargada");
-        */
-    Consultas c= new Consultas (database);
-    c.consulta1("empleado10");
-    c.consulta2();
-    c.consulta3();
-    c.consulta4();
+   
     
         
         
     }
+    /*
+    Lee un fichero csv y lo pasa a una lista de objetos de la clase Empleado
+    @param separador el caracter csv que se usa para separar
+    @param file CAdena de texto que contiene el nombre del fichero csv
+    @return Devuelve una lista de empleados
+    */
  static public List<Empleado> fromCSV2Empleado(String separador,String file){
 //fichero de texto
  File f = new File(file);
@@ -85,6 +80,12 @@ static List <Proyecto> lpry;
         }
         return r;
     }
+  /*
+    Lee un fichero csv y lo pasa a una lista de objetos de la clase Departamento
+    @param separador el caracter csv que se usa para separar
+    @param file CAdena de texto que contiene el nombre del fichero csv
+    @return Devuelve una lista de departamentos
+    */
  static public List<Departamento> fromCSV2Departamento(String separador,String file){
 //fichero de texto
  File f = new File(file);
@@ -111,6 +112,12 @@ static List <Proyecto> lpry;
         }
         return r;
     }
+  /*
+    Lee un fichero csv y lo pasa a una lista de objetos de la clase Proyecto
+    @param separador el caracter csv que se usa para separar
+    @param file CAdena de texto que contiene el nombre del fichero csv
+    @return Devuelve una lista de proyectos.
+    */
  static public List<Proyecto> fromCSV2Proyecto(String separador,String file){
 //fichero de texto
  File f = new File(file);
@@ -138,6 +145,13 @@ static List <Proyecto> lpry;
         }
         return r;
     }
+  /*
+    Lee un fichero csv que contiene una relación de empleados y los proyectos en  
+    los que participa. Alimenta la lista de proyectos de la clase Empleado en el objeto indicado.
+    y alimenta la lista de empleados de cada proyecto.
+    @param separador el caracter csv que se usa para separar
+    @param file CAdena de texto que contiene el nombre del fichero csv
+    */
  static public void fromCSV2rel(String separador,String file){
 //fichero de texto
  File f = new File(file);
@@ -171,6 +185,12 @@ static List <Proyecto> lpry;
         }
        
     }
+ /*
+ Carga la lista de proyectos, departamentos y empleados en una base de datos
+ Neodatis.
+ @param base Base de datos (cadena indicando el fichero) donde se almacenan 
+ los objetos
+ */
  static public void cargaNeodatis(String base){
      ODB db =ODBFactory.open(base);
      for(Departamento x:ldep)db.store(x);
@@ -178,25 +198,50 @@ static List <Proyecto> lpry;
      for(Proyecto x:lpry)db.store(x);
      db.close();
          }
- 
+ /*
+ Encuentra un objeto de la clase Departamento de una lista 
+ de departamentos, facilitado su identificador.
+ @param  Lista de objetos de la clase Departamento.
+ @param  atributo  idd del objeto.
+ @return objeto de la clase Departamento o null si no existe.
+ */
  static public Departamento findDepartamento(List<Departamento> l, int idd){
      Departamento r;r=null;
      for(Departamento x:l)if(x.getIdd()==idd)r=x;     
      return r;
              
  }
+ /*
+ Encuentra un objeto de la clase Empleado de una lista 
+ de empleados, facilitado su identificador.
+ @param  Lista de objetos de la clase Empleado.
+ @param  atributo  ide del objeto.
+ @return objeto de la clase Empleado o null si no existe.
+ */
  static public Empleado findEmpleado(List<Empleado> l, int ide){
      Empleado r;r=null;
      for(Empleado x:l)if(x.getIde()==ide)r=x;     
      return r;
              
  }
+ /*
+ Encuentra un objeto de la clase Proyecto de una lista 
+ de proyectos, facilitado su identificador.
+ @param  Lista de objetos de la clase Proyecto.
+ @param  atributo  idp del objeto.
+ @return objeto de la clase Proyecto o null si no existe.
+ */
  static public Proyecto findProyecto(List<Proyecto> l, int idp){
      Proyecto r;r=null;
      for(Proyecto x:l)if(x.getIdp()==idp)r=x;     
      return r;
              
  }
+ /*
+ Devuelve true o false según valor del parámetro.
+ @param s  string que vale "0" u otra cosa.
+ @return false si s es "0". true en otro caso
+ */
  static public boolean logic(String s){
      boolean r=true;
      if(s.compareTo("0")==0)r=false;
